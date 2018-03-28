@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.github.jcustenborder.kafka.connect</groupId>
         <artifactId>kafka-connect-parent</artifactId>
-        <version>0.10.2.1-cp2</version>
+        <version>1.0.0</version>
     </parent>
     <artifactId>kafka-connect-cdc-mssql</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -29,7 +29,7 @@
         <url>https://github.com/jcustenborder/kafka-connect-cdc-mssql/issues</url>
     </issueManagement>
     <properties>
-        <sql.server.version>6.0.7130</sql.server.version>
+        <sql.server.version>6.4.0.jre8</sql.server.version>
         <kafka.connect.cdc.version>[0.0.1.2,0.1.1000)</kafka.connect.cdc.version>
     </properties>
     <dependencies>
@@ -40,9 +40,8 @@
         </dependency>
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>sqljdbc4</artifactId>
+            <artifactId>mssql-jdbc</artifactId>
             <version>${sql.server.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.github.jcustenborder.kafka.connect</groupId>

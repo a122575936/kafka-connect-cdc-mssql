@@ -17,7 +17,6 @@ package com.github.jcustenborder.kafka.connect.cdc.mssql;
 
 import com.github.jcustenborder.kafka.connect.cdc.ChangeKey;
 import com.github.jcustenborder.kafka.connect.cdc.Integration;
-import com.github.jcustenborder.kafka.connect.cdc.JdbcUtils;
 import com.github.jcustenborder.kafka.connect.cdc.TableMetadataProvider;
 import com.github.jcustenborder.kafka.connect.cdc.TestDataUtils;
 import com.github.jcustenborder.kafka.connect.cdc.docker.DockerCompose;
@@ -34,13 +33,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.sql.PooledConnection;
-import java.io.File;
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -53,8 +47,8 @@ import static org.mockito.Mockito.mock;
 @Category(Integration.class)
 @DockerCompose(dockerComposePath = MsSqlTestConstants.DOCKER_COMPOSE_FILE, clusterHealthCheck = MsSqlClusterHealthCheck.class)
 @ExtendWith(MsSqlSettingsExtension.class)
-public class MsSqlTableMetadataProviderTest extends MsSqlTest {
-  private static final Logger log = LoggerFactory.getLogger(MsSqlTableMetadataProviderTest.class);
+public class MsSqlTableMetadataProviderIT extends MsSqlTest {
+  private static final Logger log = LoggerFactory.getLogger(MsSqlTableMetadataProviderIT.class);
   MsSqlSourceConnectorConfig config;
   TableMetadataProvider tableMetadataProvider;
   OffsetStorageReader offsetStorageReader;
