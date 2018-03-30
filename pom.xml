@@ -8,6 +8,7 @@
         <artifactId>kafka-connect-parent</artifactId>
         <version>1.0.0</version>
     </parent>
+    <description>Kafka Connect plugin for reading changes from Microsoft SQL Server utilizing the change tracking feature.</description>
     <artifactId>kafka-connect-cdc-mssql</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <url>https://github.com/jcustenborder/kafka-connect-cdc-mssql</url>
@@ -34,6 +35,15 @@
     </properties>
     <build>
         <plugins>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <goals>
+                    <goal>integration-test</goal>
+                </goals>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>io.confluent</groupId>
                 <artifactId>kafka-connect-maven-plugin</artifactId>
