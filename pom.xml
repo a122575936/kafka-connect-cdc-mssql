@@ -32,6 +32,37 @@
         <sql.server.version>6.4.0.jre8</sql.server.version>
         <kafka.connect.cdc.version>[0.0.1.2,0.1.1000)</kafka.connect.cdc.version>
     </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-connect-maven-plugin</artifactId>
+                <version>0.9.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>kafka-connect</goal>
+                        </goals>
+                        <configuration>
+                            <ownerUsername>jcustenborder</ownerUsername>
+                            <confluentControlCenterIntegration>true</confluentControlCenterIntegration>
+                            <documentationUrl>https://jcustenborder.github.io/kafka-connect-documentation/</documentationUrl>
+                            <ownerName>Jeremy Custenborder</ownerName>
+                            <dockerNamespace>jcustenborder</dockerNamespace>
+                            <dockerName>kafka-connect-docker</dockerName>
+                            <pluginTypes>
+                                <pluginType>source</pluginType>
+                            </pluginTypes>
+                            <tags>
+                                <tag>Microsoft SQL Server</tag>
+                                <tag>CDC</tag>
+                            </tags>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
     <dependencies>
         <dependency>
             <groupId>com.github.jcustenborder.kafka.connect</groupId>
