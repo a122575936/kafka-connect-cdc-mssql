@@ -15,16 +15,12 @@
 # limitations under the License.
 #
 
-: ${SUSPEND:='n'}
+export DEBUG_SUSPEND_FLAG=n
+export KAFKA_DEBUG=y
+export JMX_PORT=6005
 
 set -e
 
-cd ..
 mvn clean package -DskipTests
 
-cd $OLDPWD
-
-export KAFKA_JMX_OPTS="-Xdebug -agentlib:jdwp=transport=dt_socket,server=y,suspend=${SUSPEND},address=5005"
-export CLASSPATH="$(find target/kafka-connect-target/usr/share/java -type f -name '*.jar' | tr '\n' ':')"
-
-connect-standalone connect/connect-avro-docker.properties config/mssqlsource.properties
+connect-standalone config/connect-avro-docker.properties config/repro.properties

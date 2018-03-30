@@ -23,6 +23,7 @@ import com.google.common.collect.ImmutableMap;
 import org.apache.kafka.common.utils.Time;
 import org.apache.kafka.connect.data.Date;
 import org.apache.kafka.connect.data.Schema;
+import org.apache.kafka.connect.data.Timestamp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -214,10 +215,12 @@ class MsSqlChange implements Change {
         String columnName = kvp.getKey();
         Schema schema = kvp.getValue();
         Object value;
-        if (Schema.Type.INT8 == schema.type()) {
-          // Really lame Microsoft. A tiny int is stored as a single byte with a value of 0-255.
-          // Explain how this should be returned as a short?
-          value = resultSet.getByte(columnName);
+
+        if (Schema.Type.INT64 == schema.type() &&
+            Timestamp.LOGICAL_NAME.equals(schema.name())) {
+          value = new java.util.Date(
+              resultSet.getTimestamp(columnName, calendar).getTime()
+          );
         } else if (Schema.Type.INT32 == schema.type() &&
             Date.LOGICAL_NAME.equals(schema.name())) {
           value = new java.util.Date(
@@ -228,6 +231,10 @@ class MsSqlChange implements Change {
           value = new java.util.Date(
               resultSet.getTime(columnName, calendar).getTime()
           );
+        } else if (Schema.Type.INT8 == schema.type()) {
+          // Really lame Microsoft. A tiny int is stored as a single byte with a value of 0-255.
+          // Explain how this should be returned as a short?
+          value = resultSet.getByte(columnName);
         } else {
           value = resultSet.getObject(columnName);
         }

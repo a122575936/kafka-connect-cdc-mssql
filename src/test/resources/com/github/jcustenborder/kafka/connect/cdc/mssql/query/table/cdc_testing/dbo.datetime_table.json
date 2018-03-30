@@ -40,7 +40,7 @@
     }
   }, {
     "columnName" : "value",
-    "value" : 1178207400000,
+    "value" : 1178189400000,
     "schema" : {
       "name" : "org.apache.kafka.connect.data.Timestamp",
       "type" : "INT64",
