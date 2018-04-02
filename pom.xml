@@ -66,7 +66,9 @@
                             <tags>
                                 <tag>Microsoft SQL Server</tag>
                                 <tag>CDC</tag>
+                                <tag>Change Tracking</tag>
                             </tags>
+                            <title>Kafka Connect CDC Microsoft SQL</title>
                         </configuration>
                     </execution>
                 </executions>
