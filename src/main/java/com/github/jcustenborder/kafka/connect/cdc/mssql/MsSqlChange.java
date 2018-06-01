@@ -217,15 +217,15 @@ class MsSqlChange implements Change {
         Object value;
 
         if (Schema.Type.INT64 == schema.type() &&
-            Timestamp.LOGICAL_NAME.equals(schema.name())) {
-          value = new java.util.Date(
-              resultSet.getTimestamp(columnName, calendar).getTime()
-          );
+                Timestamp.LOGICAL_NAME.equals(schema.name())) {
+
+          java.sql.Timestamp timestamp = resultSet.getTimestamp(columnName, calendar);
+          value = timestamp == null ? null : new java.util.Date(timestamp.getTime());
         } else if (Schema.Type.INT32 == schema.type() &&
-            Date.LOGICAL_NAME.equals(schema.name())) {
-          value = new java.util.Date(
-              resultSet.getDate(columnName, calendar).getTime()
-          );
+                Date.LOGICAL_NAME.equals(schema.name())) {
+
+          java.sql.Date date = resultSet.getDate(columnName, calendar);
+          value = date == null ? null : new java.util.Date(date.getTime());
         } else if (Schema.Type.INT32 == schema.type() &&
             org.apache.kafka.connect.data.Time.LOGICAL_NAME.equals(schema.name())) {
           value = new java.util.Date(
